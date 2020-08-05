@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChatApp.Core.Models
+namespace ChatApp.Models.Common
 {
     public class ApplicationUser : IdentityUser
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ChatApp.Core
+namespace ChatApp.Models.Domain
 {
     [Table("AspNetUserLogins", Schema = "chat_app")]
     public partial class AspNetUserLogins

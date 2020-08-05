@@ -1,4 +1,5 @@
-﻿using ChatApp.Core.Models;
+﻿using ChatApp.Models.Common;
+using ChatApp.Models.Domain;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChatApp.Core.Data
+namespace ChatApp.Models
 {
     public class ChatDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
@@ -18,6 +19,8 @@ namespace ChatApp.Core.Data
         {
             operationalStoreOptions.Value.DefaultSchema = "chat_app";
         }
+
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
 
     }
 }

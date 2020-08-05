@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using ChatApp.Core.Data;
-using ChatApp.Core.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ChatApp.Core.Hubs;
+using ChatApp.Models.Common;
+using ChatApp.Models;
 
 namespace ChatApp.Core
 {
@@ -31,16 +32,47 @@ namespace ChatApp.Core
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ChatDbContext>();
+            //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ChatDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ChatDbContext>();
+            //services.AddIdentityServer(options => {
+            //        options.UserInteraction.LoginUrl = "http://localhost:3000/login";
+            //        options.UserInteraction.ErrorUrl = "http://localhost:3000/error";
+            //        options.UserInteraction.LogoutUrl = "http://localhost:3000/logout";
+            //    })
+            //    .AddApiAuthorization<ApplicationUser, ChatDbContext>();
 
-            services.AddAuthentication()
-                .AddIdentityServerJwt();
+            //services.AddAuthentication()
+            //    .AddIdentityServerJwt();
+
+            
+
+            services
+                .AddAuthorization()
+                .AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = Configuration["Authority"];
+                    options.RequireHttpsMetadata = false;
+                    options.Audience = Configuration["Audience"];
+                });
+
+            //services.AddAuthorization();
+
+            services.AddCors(setup =>
+            {
+                setup.AddDefaultPolicy(policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+                });
+            });
+
 
             services.AddControllersWithViews();
+            services.AddControllers();
             services.AddRazorPages();
 
             // In production, the React files will be served from this directory

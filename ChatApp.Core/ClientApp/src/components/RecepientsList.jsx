@@ -7,7 +7,7 @@ import { List, ListItem } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     listContainer:{
         "overflow-y":"auto",
-        height: "100%"
+        height: "calc(100% - 70px)"
     }
   }));
 

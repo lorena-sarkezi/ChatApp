@@ -1,4 +1,5 @@
 ﻿using ChatApp.Core.Data;
+using ChatApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;

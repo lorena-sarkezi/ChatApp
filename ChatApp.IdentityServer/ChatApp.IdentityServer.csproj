@@ -13,8 +13,4 @@
     <ProjectReference Include="..\ChatApp.Models\ChatApp.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

@@ -11,16 +11,18 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Models
 {
-    public class ChatDbContext : ApiAuthorizationDbContext<ApplicationUser>
+    public class ChatDbContext : DbContext
     {
-        public ChatDbContext(
-            DbContextOptions options,
-            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
+        public ChatDbContext(DbContextOptions options) : base(options)
         {
-            operationalStoreOptions.Value.DefaultSchema = "chat_app";
+            
         }
 
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set;  }
 
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
     }
 }

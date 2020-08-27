@@ -6,13 +6,18 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
-using ChatApp.Core.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ChatApp.Core.Hubs;
 using ChatApp.Models.Common;
 using ChatApp.Models;
+using ChatApp.Core.Services.Interfaces;
+using ChatApp.Core.Services.Impl;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace ChatApp.Core
 {
@@ -32,30 +37,41 @@ namespace ChatApp.Core
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<ChatDbContext>();
-
-            //services.AddIdentityServer(options => {
-            //        options.UserInteraction.LoginUrl = "http://localhost:3000/login";
-            //        options.UserInteraction.ErrorUrl = "http://localhost:3000/error";
-            //        options.UserInteraction.LogoutUrl = "http://localhost:3000/logout";
-            //    })
-            //    .AddApiAuthorization<ApplicationUser, ChatDbContext>();
-
-            //services.AddAuthentication()
-            //    .AddIdentityServerJwt();
-
-            
-
-            services
-                .AddAuthorization()
-                .AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
+            byte[] clientSecretKey = Encoding.ASCII.GetBytes(Configuration["ClientSecret"]);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.Authority = Configuration["Authority"];
-                    options.RequireHttpsMetadata = false;
-                    options.Audience = Configuration["Audience"];
-                });
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(clientSecretKey),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        context.HttpContext.User = context.Principal;
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
+
+            //services
+            //    .AddAuthorization()
+            //    .AddAuthentication("Bearer")
+            //    .AddJwtBearer("Bearer", options =>
+            //    {
+            //        options.Authority = Configuration["Authority"];
+            //        options.RequireHttpsMetadata = false;
+            //        options.Audience = Configuration["Audience"];
+            //    });
 
             //services.AddAuthorization();
 
@@ -82,6 +98,8 @@ namespace ChatApp.Core
             });
 
             services.AddSignalR();
+
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +116,20 @@ namespace ChatApp.Core
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.Use(async (context, next) =>
+            {
+
+                if (context.Request.Cookies["token"] != null)
+                {
+                    string token = context.Request.Cookies["token"];
+                    if (context.Request.Headers.ContainsKey("Authorization") == false)
+                    {
+                        context.Request.Headers.Add("Authorization", "Bearer " + token);
+                    }
+                }
+                await next();
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

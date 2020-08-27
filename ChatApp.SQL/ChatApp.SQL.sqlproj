@@ -13,7 +13,7 @@
     </RootPath>
     <RootNamespace>ChatApp.SQL</RootNamespace>
     <AssemblyName>ChatApp.SQL</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -22,7 +22,8 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultSchema>chat_app</DefaultSchema>
+    <DefaultSchema>chat</DefaultSchema>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -62,16 +63,10 @@
     <Folder Include="Indexes" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schema\chat_app.sql" />
-    <Build Include="Tables\AspNetRoles.sql" />
-    <Build Include="Tables\AspNetUsers.sql" />
-    <Build Include="Tables\DeviceCodes.sql" />
-    <Build Include="Tables\PersistedGrants.sql" />
-    <Build Include="Tables\AspNetRoleClaims.sql" />
-    <Build Include="Tables\AspNetUserClaims.sql" />
-    <Build Include="Tables\AspNetUserLogins.sql" />
-    <Build Include="Tables\AspNetUserRoles.sql" />
-    <Build Include="Tables\AspNetUserTokens.sql" />
-    <Build Include="Indexes\IdentityTablesIndexes.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Roles.sql" />
+    <Build Include="Schema\chat.sql" />
+    <Build Include="Tables\Persons.sql" />
+    <Build Include="Tables\Genders.sql" />
   </ItemGroup>
 </Project>

@@ -1,2 +1,0 @@
-﻿CREATE SCHEMA [chat_app]
-	AUTHORIZATION [dbo];

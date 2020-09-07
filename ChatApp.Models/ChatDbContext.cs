@@ -1,5 +1,5 @@
 ﻿using ChatApp.Models.Common;
-using ChatApp.Models.Domain;
+using ChatApp.Models.Database;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;

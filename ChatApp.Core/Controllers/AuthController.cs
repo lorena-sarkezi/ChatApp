@@ -36,9 +36,8 @@ namespace ChatApp.Core.Controllers
         {
             var stream = HttpContext.Request.Headers["Authorization"].ToString().Split(" ")[1];
             var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(stream);
-            var tokenS = handler.ReadToken(stream) as JwtSecurityToken;
-
+            var securityToken = handler.ReadToken(stream);
+            var jwtSecurityToken = handler.ReadToken(stream) as JwtSecurityToken;
             
 
             return new OkResult();

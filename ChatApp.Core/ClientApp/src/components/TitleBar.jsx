@@ -25,7 +25,7 @@ export default function TitleBar(){
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        Pametno edgy ime aplikacije
+                        KronosChat
                     </Typography>
                 </Toolbar>
             </AppBar>

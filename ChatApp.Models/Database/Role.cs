@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Models.Domain
+namespace ChatApp.Models.Database
 {
     [Table("roles", Schema ="chat")]
     public class Role

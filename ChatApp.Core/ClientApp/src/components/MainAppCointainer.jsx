@@ -5,8 +5,10 @@ import authService from './api-authorization/AuthorizeService';
 import TitleBar from './TitleBar';
 import RecepientsList from './RecepientsList';
 import RecepientsSearchToolbar from './RecepientsSearchToolbar';
+import ChatSurfaceContainer from './ChatSurfaceContainer';
+import MessageInput from './MessageInput';
 
-import { Paper, Container, Grid, Typography, TextField, Toolbar } from '@material-ui/core'
+import { Paper, Container, Grid } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -54,6 +56,8 @@ export default function MainAppContainer(props){
                                 <RecepientsList />
                             </Grid>
                             <Grid item md>
+                              <ChatSurfaceContainer />
+                              <MessageInput />
                             </Grid>
                         </Grid>
                     </main>

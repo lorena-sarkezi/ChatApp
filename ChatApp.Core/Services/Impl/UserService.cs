@@ -2,7 +2,7 @@
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Models;
 using ChatApp.Models.Common;
-using ChatApp.Models.Domain;
+using ChatApp.Models.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;

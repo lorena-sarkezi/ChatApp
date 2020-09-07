@@ -14,6 +14,7 @@ import { Layout } from './components/Layout';
 import Home from './components/Home.js';
 import { Counter } from './components/Counter';
 import { FetchData } from './components/FetchData';
+import './style.css';
 
 export default function App()  {
 

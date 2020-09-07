@@ -12,16 +12,13 @@ import{
 
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: "2em",
-      height: "100%"
-    },
-    container:{
-      height: "100%"
-    },
-    root: {
-      flexGrow: 1,
-    }
+    // paper: {
+    //   marginTop: "2em",
+    //   height: "100%"
+    // },
+    // root: {
+    //   flexGrow: 1,
+    // }
   }));
 
 export default function RecepientsSearchToolbar(props){
@@ -37,15 +34,13 @@ export default function RecepientsSearchToolbar(props){
     const classes = useStyles();
 
     return(
-        <Paper elevation={1}>
-            <Toolbar className={classes.root} style={{backgroundColor: "whitesmoke", marginBottom:"5px"}}>
+        <Paper elevation={1} square>
+            <Toolbar  style={{backgroundColor: "whitesmoke", marginBottom:"5px"}}>
                 <Grid container spacing={0} alignItems="flex-end">
                     <Grid item md={10}>
-                        <TextField placeholder="Pretraga..." fullWidth InputProps={inputSearch}/>
+                        <TextField placeholder="Pretraga..." fullWidth InputProps={inputSearch} margin="dense"/>
                     </Grid>
-                    <Grid item>
                     
-                    </Grid>
                 </Grid>
                 
             </Toolbar>

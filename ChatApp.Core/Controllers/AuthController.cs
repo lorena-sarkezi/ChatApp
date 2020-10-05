@@ -21,6 +21,7 @@ namespace ChatApp.Core.Controllers
             this.userService = userService;
         }
 
+        [HttpPost("authenticate")]
         public IActionResult Authenticate(LoginModel model)
         {
             string token = userService.TryLoginUser(model);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
 import{
     Grid,
@@ -43,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecepientsListItem(props){
     const classes = useStyles();
-
-    const message = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
     return(
         <React.Fragment>

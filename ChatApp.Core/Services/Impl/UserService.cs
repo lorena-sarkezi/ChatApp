@@ -35,6 +35,8 @@ namespace ChatApp.Core.Services.Impl
 
             User user = chatDbContext.Users.FirstOrDefault(x => x.Username == model.Username);
 
+            if (user == null) return null;
+
             byte[] saltedPasswordByteArr = KeyDerivation.Pbkdf2(password, Encoding.ASCII.GetBytes(user.PasswordSalt), KeyDerivationPrf.HMACSHA256, 1000, 64);
 
             if(Encoding.ASCII.GetString(saltedPasswordByteArr) != user.Password)

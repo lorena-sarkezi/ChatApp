@@ -11,15 +11,6 @@ import{
 } from '@material-ui/core';
 
 
-const useStyles = makeStyles((theme) => ({
-    // paper: {
-    //   marginTop: "2em",
-    //   height: "100%"
-    // },
-    // root: {
-    //   flexGrow: 1,
-    // }
-  }));
 
 export default function RecepientsSearchToolbar(props){
 
@@ -30,8 +21,6 @@ export default function RecepientsSearchToolbar(props){
             </InputAdornment>
           )
     }
-
-    const classes = useStyles();
 
     return(
         <Paper elevation={1} square>

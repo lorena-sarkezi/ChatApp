@@ -1,5 +1,4 @@
 import React from 'react';
-import { Paper, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import MessageBubble from './MessageBubble';
@@ -24,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function ChatSurfaceContainer(props)  {
-
-    const chatElementPaperElevation = 1;
     
     const styles = useStyles();
 

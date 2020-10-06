@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [chat].[Genders]
 (
 	[Id] INT NOT NULL IDENTITY PRIMARY KEY,
-	[gender_name] NVARCHAR(16) NOT NULL
+	[GenderName] NVARCHAR(16) NOT NULL
 
 )

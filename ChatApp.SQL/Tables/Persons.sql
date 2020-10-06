@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [chat].[Persons]
 (
 	[Id] INT NOT NULL IDENTITY,
-	[gender_id] INT NULL,
-	[first_name] NVARCHAR(64) NULL,
-	[last_name] NVARCHAR(64) NULL,
+	[GenderId] INT NULL,
+	[FirstName] NVARCHAR(64) NULL,
+	[LastName] NVARCHAR(64) NULL,
 
 	CONSTRAINT persons_pk PRIMARY KEY (id),
-	CONSTRAINT gender_fk FOREIGN KEY (gender_id) REFERENCES [chat].[genders](id)
+	CONSTRAINT gender_fk FOREIGN KEY (GenderId) REFERENCES [chat].[genders](id)
 
 )

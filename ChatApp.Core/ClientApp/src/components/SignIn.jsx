@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -60,7 +61,7 @@ const formEmpty ={
   remember:false
 }
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
 
   const [credentialsInvalid, setCredentialsInvalid] = useState(false);
@@ -99,20 +100,24 @@ export default function SignIn() {
 
   const handleFormSubmit = () =>{
     if(validateForm()){
+      let formattedData = {...formData};
+      formattedData.password = btoa(formattedData.password); //Base64 encode
+
       let axiosOptions = {
         method:'POST',
-        url:'http://localhost:5000/api/auth/authenticate',
-        data: {...formData}
+        url:'/api/auth/authenticate',
+        data: formattedData
       };
 
       axios(axiosOptions)
       .then((response) =>{
         if(response.status === 200){
-          Window.localStorage.setItem("token", response.content)
+          Window.localStorage.setItem("token", response.content);
+          this.props.history.push('/');
         }
       })
       .catch(error =>{
-        console.log(error);
+        console.log(error.response.status);
       });
     }
   }
@@ -181,7 +186,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

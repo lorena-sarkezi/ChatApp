@@ -1,6 +1,4 @@
-import React, { useState, useContext, useEffect, createContext } from 'react';
-
-import authService from './api-authorization/AuthorizeService';
+import React, { useEffect, createContext } from 'react';
 
 import TitleBar from './TitleBar';
 import RecepientsList from './RecepientsList';
@@ -41,7 +39,7 @@ export default function MainAppContainer(props){
     const UserContext = createContext();
     
     useEffect(() => {
-        UserContext.Provider = authService.getUser();
+        //UserContext.Provider = authService.getUser();
     }, []);
 
     return(

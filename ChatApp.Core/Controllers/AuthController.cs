@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Models.Common;
@@ -22,9 +19,9 @@ namespace ChatApp.Core.Controllers
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(LoginModel model)
+        public async Task<IActionResult> Authenticate(LoginModel model)
         {
-            string token = userService.TryLoginUser(model);
+            string token = await userService.TryLoginUser(model);
 
             if (token == null)
                 return new UnauthorizedResult();
@@ -39,7 +36,7 @@ namespace ChatApp.Core.Controllers
             var handler = new JwtSecurityTokenHandler();
             var securityToken = handler.ReadToken(stream);
             var jwtSecurityToken = handler.ReadToken(stream) as JwtSecurityToken;
-            
+
 
             return new OkResult();
         }

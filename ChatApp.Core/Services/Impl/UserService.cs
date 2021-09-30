@@ -1,45 +1,40 @@
-﻿using ChatApp.Core.Helpers;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using ChatApp.Core.Helpers;
 using ChatApp.Core.Services.Interfaces;
-using ChatApp.Models;
+using ChatApp.Data.Interfaces;
 using ChatApp.Models.Common;
 using ChatApp.Models.Database;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
-using System.Data.SqlTypes;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
-using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ChatApp.Core.Services.Impl
 {
     public class UserService : IUserService
     {
-        private readonly ChatDbContext chatDbContext;
+        private readonly IUserRepository _userRepository;
         private readonly IConfiguration Configuration;
 
-        public UserService(ChatDbContext chatDbContext, IConfiguration configuration)
+        public UserService(IUserRepository userRepository, IConfiguration configuration)
         {
-            this.chatDbContext = chatDbContext;
+            _userRepository = userRepository;
             this.Configuration = configuration;
         }
 
-        public string TryLoginUser(LoginModel model)
+        public async Task<string> TryLoginUser(LoginModel model)
         {
             string password = Base64.Base64Decode(model.Password);
 
-            User user = chatDbContext.Users.FirstOrDefault(x => x.Username == model.Username);
+            User user = await _userRepository.GetUserByUsername(model.Username);
 
             if (user == null) return null;
 
             byte[] saltedPasswordByteArr = KeyDerivation.Pbkdf2(password, Encoding.ASCII.GetBytes(user.PasswordSalt), KeyDerivationPrf.HMACSHA256, 1000, 64);
 
-            if(Encoding.ASCII.GetString(saltedPasswordByteArr) != user.Password)
+            if (Encoding.ASCII.GetString(saltedPasswordByteArr) != user.Password)
                 return null;
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
@@ -62,6 +57,11 @@ namespace ChatApp.Core.Services.Impl
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<bool> CheckIfTokenValid(string token)
+        {
+            return true;
         }
     }
 }

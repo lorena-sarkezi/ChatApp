@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Models", "ChatApp.Models\ChatApp.Models.csproj", "{A4FF39D4-9561-46A5-9D92-248D193C63CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Common", "ChatApp.Models\ChatApp.Common.csproj", "{A4FF39D4-9561-46A5-9D92-248D193C63CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Core", "ChatApp.Core\ChatApp.Core.csproj", "{E934B8B2-4E50-44E2-A754-B88862D24096}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ChatApp.SQL", "ChatApp.SQL\ChatApp.SQL.sqlproj", "{5660F828-887A-4A8A-B3D8-291EDC0D15F4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F7763DC-6DD0-4F95-A1C9-7FDCF5975A49}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E34B2EA6-B334-493A-891E-FD549CFF8398}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Data", "ChatApp.Data\ChatApp.Data.csproj", "{88BC668F-9F87-4216-A920-F8BB87179C5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Domain", "ChatApp.Domain\ChatApp.Domain.csproj", "{86E3CCFA-B760-4601-B435-A9C4E72F1EEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +35,21 @@ Global
 		{5660F828-887A-4A8A-B3D8-291EDC0D15F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5660F828-887A-4A8A-B3D8-291EDC0D15F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5660F828-887A-4A8A-B3D8-291EDC0D15F4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{88BC668F-9F87-4216-A920-F8BB87179C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88BC668F-9F87-4216-A920-F8BB87179C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88BC668F-9F87-4216-A920-F8BB87179C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88BC668F-9F87-4216-A920-F8BB87179C5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E3CCFA-B760-4601-B435-A9C4E72F1EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E3CCFA-B760-4601-B435-A9C4E72F1EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E3CCFA-B760-4601-B435-A9C4E72F1EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E3CCFA-B760-4601-B435-A9C4E72F1EEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A4FF39D4-9561-46A5-9D92-248D193C63CB} = {3F7763DC-6DD0-4F95-A1C9-7FDCF5975A49}
-		{E934B8B2-4E50-44E2-A754-B88862D24096} = {3F7763DC-6DD0-4F95-A1C9-7FDCF5975A49}
-		{5660F828-887A-4A8A-B3D8-291EDC0D15F4} = {3F7763DC-6DD0-4F95-A1C9-7FDCF5975A49}
+		{88BC668F-9F87-4216-A920-F8BB87179C5A} = {E34B2EA6-B334-493A-891E-FD549CFF8398}
+		{86E3CCFA-B760-4601-B435-A9C4E72F1EEC} = {E34B2EA6-B334-493A-891E-FD549CFF8398}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA0DB91F-B9B4-4058-B038-0255A7451EC2}

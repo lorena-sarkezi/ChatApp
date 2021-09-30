@@ -1,13 +1,11 @@
-﻿using ChatApp.Models.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using ChatApp.Models.Common;
 
 namespace ChatApp.Core.Services.Interfaces
 {
     public interface IUserService
     {
-        string TryLoginUser(LoginModel model);
+        Task<string> TryLoginUser(LoginModel model);
+        Task<bool> CheckIfTokenValid(string jwtToken);
     }
 }

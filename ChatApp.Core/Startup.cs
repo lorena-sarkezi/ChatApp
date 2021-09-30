@@ -1,23 +1,17 @@
-using Microsoft.AspNetCore.Authentication;
+using System.Text;
+using System.Threading.Tasks;
+using ChatApp.Core.Hubs;
+using ChatApp.Core.Services.Impl;
+using ChatApp.Core.Services.Interfaces;
+using ChatApp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ChatApp.Core.Hubs;
-using ChatApp.Models.Common;
-using ChatApp.Models;
-using ChatApp.Core.Services.Interfaces;
-using ChatApp.Core.Services.Impl;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
-using System.Text;
 
 namespace ChatApp.Core
 {
@@ -147,17 +141,6 @@ namespace ChatApp.Core
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ChatHub>("/chat");
-            });
-
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
             });
         }
     }

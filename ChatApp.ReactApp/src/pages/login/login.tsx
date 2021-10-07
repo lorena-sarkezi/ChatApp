@@ -1,27 +1,14 @@
-import React from 'react';
-import {Grid, Row, Card } from 'antd';
+import { Row, Col, Card } from "antd";
 
-import LoginForm from '../../components/loginForm';
+import LoginForm from "../../components/loginForm";
 
 export const Login = () => {
-  const onFinish = () => {
-    console.log('Success:');
-  };
-
-  const onFinishFailed = () => {
-    console.log('Failed:');
-  };
 
   return (
     <Row>
-      <Card title="Login">
-        <LoginForm
-          onFinishSuccessCallback={onFinish}
-          onFinishFailedCallback={onFinishFailed}
-        />
+      <Card title="Login" className="horizontal_center">
+          <LoginForm />
       </Card>
     </Row>
-    
-  )
-    
+  );
 };

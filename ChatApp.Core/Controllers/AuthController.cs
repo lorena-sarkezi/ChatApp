@@ -19,7 +19,7 @@ namespace ChatApp.Core.Controllers
         }
 
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate(LoginModel model)
+        public async Task<IActionResult> Authenticate(LoginDTO model)
         {
             string token = await userService.TryLoginUser(model);
 

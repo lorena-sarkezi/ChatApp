@@ -1,4 +1,4 @@
-﻿CREATE TABLE [chat].[Persons]
+﻿CREATE TABLE [dbo].[Persons]
 (
 	[Id] INT NOT NULL IDENTITY,
 	[GenderId] INT NULL,
@@ -6,6 +6,6 @@
 	[LastName] NVARCHAR(64) NULL,
 
 	CONSTRAINT persons_pk PRIMARY KEY (id),
-	CONSTRAINT gender_fk FOREIGN KEY (GenderId) REFERENCES [chat].[genders](id)
+	CONSTRAINT gender_fk FOREIGN KEY (GenderId) REFERENCES [dbo].[genders](id)
 
 )

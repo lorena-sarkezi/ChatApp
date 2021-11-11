@@ -1,4 +1,4 @@
-﻿CREATE TABLE [chat].[Roles]
+﻿CREATE TABLE [dbo].[Roles]
 (
 	[Id] INT NOT NULL IDENTITY,
 	[RoleName] NVARCHAR(16) NOT NULL,

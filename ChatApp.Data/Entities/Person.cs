@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Models.Database
+namespace ChatApp.Data.Entities
 {
     [Table("persons", Schema ="chat")]
     public class Person

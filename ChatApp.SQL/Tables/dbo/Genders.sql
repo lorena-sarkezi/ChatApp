@@ -1,4 +1,4 @@
-﻿CREATE TABLE [chat].[Genders]
+﻿CREATE TABLE [dbo].[Genders]
 (
 	[Id] INT NOT NULL IDENTITY PRIMARY KEY,
 	[GenderName] NVARCHAR(16) NOT NULL

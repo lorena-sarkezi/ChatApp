@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChatApp.Models.Common
 {
-    public class LoginModel
+    public class LoginDTO
     {
         public string Username { get; set; }
         public string Password { get; set; }

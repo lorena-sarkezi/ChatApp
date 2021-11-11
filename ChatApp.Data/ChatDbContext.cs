@@ -1,4 +1,4 @@
-﻿using ChatApp.Models.Database;
+﻿using ChatApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatApp.Data
@@ -16,5 +16,8 @@ namespace ChatApp.Data
 
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Media> MessageMedia { get; set; }
     }
 }

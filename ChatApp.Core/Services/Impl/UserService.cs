@@ -24,7 +24,7 @@ namespace ChatApp.Core.Services.Impl
             this.Configuration = configuration;
         }
 
-        public async Task<string> TryLoginUser(LoginModel model)
+        public async Task<string> TryLoginUser(LoginDTO model)
         {
             string password = Base64.Base64Decode(model.Password);
 

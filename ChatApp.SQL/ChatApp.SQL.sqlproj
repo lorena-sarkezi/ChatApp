@@ -61,12 +61,16 @@
     <Folder Include="Schema" />
     <Folder Include="Tables" />
     <Folder Include="Indexes" />
+    <Folder Include="Tables\dbo" />
+    <Folder Include="Tables\chat" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Users.sql" />
-    <Build Include="Tables\Roles.sql" />
     <Build Include="Schema\chat.sql" />
-    <Build Include="Tables\Persons.sql" />
-    <Build Include="Tables\Genders.sql" />
+    <Build Include="Tables\dbo\Genders.sql" />
+    <Build Include="Tables\dbo\Persons.sql" />
+    <Build Include="Tables\dbo\Roles.sql" />
+    <Build Include="Tables\dbo\Users.sql" />
+    <Build Include="Tables\chat\Media.sql" />
+    <Build Include="Tables\chat\Messages.sql" />
   </ItemGroup>
 </Project>

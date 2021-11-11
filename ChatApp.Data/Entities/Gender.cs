@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Models.Database
+namespace ChatApp.Data.Entities
 {
     [Table("genders",Schema ="chat")]
     public class Gender

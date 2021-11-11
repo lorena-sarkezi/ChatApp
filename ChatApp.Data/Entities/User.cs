@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Models.Database
-{
-    [Table("users", Schema = "chat")]
+namespace ChatApp.Data.Entities { 
+    [Table("users")]
     public class User
     {
         [Required]
@@ -36,5 +35,8 @@ namespace ChatApp.Models.Database
 
         public virtual Role Role { get; set; }
         public virtual Person Person { get; set; }
+
+        [InverseProperty("UserId")]
+        public IEnumerable<Message> Messages { get; set; }
     }
 }

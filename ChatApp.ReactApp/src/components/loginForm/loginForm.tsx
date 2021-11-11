@@ -47,7 +47,7 @@ export const LoginForm = (props: any) => {
 
   return (
     <Form
-      name="basic"
+      name="login-form"
       labelCol={{ span: 7 }}
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}

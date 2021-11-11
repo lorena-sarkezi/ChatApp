@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Models.Database
+namespace ChatApp.Data.Entities
 {
-    [Table("roles", Schema ="chat")]
+    [Table("roles")]
     public class Role
     {
         public int Id { get; set; }

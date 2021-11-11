@@ -17,12 +17,12 @@ namespace ChatApp.Domain.Repositories
 
         public async Task<User> GetUserById(long userId)
         {
-            return await _chatDbContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            return await _chatDbContext.Users.FindAsync(userId);
         }
 
         public async Task<User> GetUserByUsername(string username)
         {
-            return await _chatDbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+            return await _chatDbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
         }
     }
 }

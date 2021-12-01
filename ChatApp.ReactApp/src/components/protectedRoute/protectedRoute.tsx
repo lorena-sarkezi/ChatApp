@@ -7,7 +7,9 @@ export type ProtectedRouteProps = {
   authenticationPath: string;
 } & RouteProps;
 
-export const ProtectedRoute = ({isAuthenticated, authenticationPath, ...routeProps}: ProtectedRouteProps) => {
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
+  const { isAuthenticated, authenticationPath, routeProps } = props;
+
   if(isAuthenticated) {
     return <Route {...routeProps} />;
   } 

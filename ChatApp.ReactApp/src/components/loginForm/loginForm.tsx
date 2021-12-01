@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Form, Input, Button, Checkbox } from 'antd';
 
-import {ILogin} from '../../models/ILogin'
-import axios from '../../axios';
+import {ILogin} from 'models/ILogin'
+import axios from 'axios';
 
 export const LoginForm = (props: any) => {
 

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-import axios from '../../axios';
-import MessagingContext, {IMessagingContextContent} from '../../context/MessagingContext';
+import axios from 'axios';
+import MessagingContext, {IMessagingContextContent} from 'context/MessagingContext';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 import Home from './Home';
-import { IMessage } from '../../models/IMessage';
+import { IMessage } from 'models/IMessage';
 
 const HomeMainViewContainer = () => {
 

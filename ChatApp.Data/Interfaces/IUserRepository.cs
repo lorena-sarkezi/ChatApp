@@ -1,11 +1,13 @@
-﻿using System.Threading.Tasks;
-using ChatApp.Models.Database;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using ChatApp.Data.Entities;
 
 namespace ChatApp.Data.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetUserById(long userId);
-        Task<User> GetUserByUsername(string username);
+        Task<User> GetByIdAsync(long userId);
+        Task<User> GetByUsernameAsync(string username);
+        Task<List<User>> GetAllAsync();
     }
 }

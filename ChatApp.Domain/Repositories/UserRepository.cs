@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ChatApp.Data;
+using ChatApp.Data.Entities;
 using ChatApp.Data.Interfaces;
-using ChatApp.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatApp.Domain.Repositories
@@ -15,14 +16,19 @@ namespace ChatApp.Domain.Repositories
             _chatDbContext = chatDbContext;
         }
 
-        public async Task<User> GetUserById(long userId)
+        public async Task<User> GetByIdAsync(long userId)
         {
             return await _chatDbContext.Users.FindAsync(userId);
         }
 
-        public async Task<User> GetUserByUsername(string username)
+        public async Task<User> GetByUsernameAsync(string username)
         {
             return await _chatDbContext.Users.SingleOrDefaultAsync(x => x.Username == username);
+        }
+
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await _chatDbContext.Users.ToListAsync();
         }
     }
 }

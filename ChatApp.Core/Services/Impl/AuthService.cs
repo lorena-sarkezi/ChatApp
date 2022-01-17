@@ -1,4 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +21,21 @@ namespace ChatApp.Core.Services.Impl
         private readonly IUserRepository _userRepository;
         private readonly IConfiguration Configuration;
 
+        private readonly string _clientSecret;
+
         public AuthService(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             this.Configuration = configuration;
+
+            _clientSecret = Configuration["ClientSecret"];
         }
 
         public async Task<string> LoginAsync(LoginDTO model)
         {
             string password = Base64.Base64Decode(model.Password);
 
-            User user = await _userRepository.GetUserByUsername(model.Username);
+            User user = await _userRepository.GetByUsernameAsync(model.Username);
 
             if (user == null) return null;
 
@@ -39,7 +45,7 @@ namespace ChatApp.Core.Services.Impl
                 return null;
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            byte[] key = Encoding.ASCII.GetBytes(Configuration["ClientSecret"]);
+            byte[] key = Encoding.ASCII.GetBytes(_clientSecret);
 
             var claims = new[]
             {
@@ -62,7 +68,35 @@ namespace ChatApp.Core.Services.Impl
 
         public async Task<bool> CheckIfTokenValid(string token)
         {
-            return true;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_clientSecret);
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userIdClaim = jwtToken.Claims.SingleOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub);
+                    
+                if(userIdClaim == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch
+            {
+                // return null if validation fails
+                return false;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
-import { Row, Col, Card } from "antd";
+import { Row, Card } from "antd";
 
-import LoginForm from "components/loginForm";
+import LoginForm from "../../components/loginForm";
 
 export const Login = () => {
 

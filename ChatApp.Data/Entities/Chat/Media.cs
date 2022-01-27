@@ -12,12 +12,9 @@ namespace ChatApp.Data.Entities.Chat
     public class Media
     {
         public int MediaId { get; set; }
-        public int MessageId { get; set; }
         public int AzureBlobId { get; set; }
         public string FilePath { get; set; }    
         public DateTime TimestampCreated { get; set; }
-
-        public virtual User User { get; set; }
 
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChatApp.Data.Entities.Common;
+using ChatApp.Data.Entities.Enum;
 
 namespace ChatApp.Data.Entities.Chat
 {
@@ -15,8 +16,17 @@ namespace ChatApp.Data.Entities.Chat
         [Required]
         public int MessageId { get; set; }
 
-        [Required, ForeignKey("User")]
-        public int UserId { get; set; }
+        [Required, ForeignKey("SenderUser")]
+        public int SenderUserId { get; set; }
+
+        [Required, ForeignKey("Conversation")]
+        public int ConversationId { get; set; }
+
+        [ForeignKey("Media")]
+        public int MediaId { get; set; }
+
+        [Required]
+        public MessageTypeEnum MessageTypeId { get; set; }
 
         public string MessageContent { get; set; }
 
@@ -24,7 +34,11 @@ namespace ChatApp.Data.Entities.Chat
         public DateTime TimestampCreated { get; set; }
 
 
-        public virtual User User { get; set; }
+        public virtual User SenderUser { get; set; }
+
+        public virtual Conversation Conversation { get; set; }
+
+        public virtual Media Media { get; set; }
 
     }
 }

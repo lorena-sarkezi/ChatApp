@@ -6,8 +6,8 @@
 		SET NOCOUNT ON
 
 		UPDATE c
-		SET c.LatestMessage = ins.TimestampCreated
+		SET c.LatestMessageTimestamp = ins.TimestampCreated
 		FROM chat.Conversations c
-			INNER JOIN inserted ins on ins.ConversationId = c.Id
+			INNER JOIN inserted ins on ins.ConversationId = c.ConversationId
 
 	END

@@ -13,7 +13,7 @@ namespace ChatApp.Data.Entities.Chat
     public class Conversation
     {
         [Key]
-        public int Id { get; set; }
+        public int ConversationId { get; set; }
 
         [Required]
         public ConversationTypeEnum ConversationTypeId { get; set; }

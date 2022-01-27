@@ -19,6 +19,8 @@ namespace ChatApp.Data
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
 
+        public virtual DbSet<Conversation> Conversations { get; set; }
+        public virtual DbSet<ConversationParticipant> ConversationParticipants { get; set;}
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Media> MessageMedia { get; set; }
     }

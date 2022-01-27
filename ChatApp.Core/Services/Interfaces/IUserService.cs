@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChatApp.Data.Entities;
+using ChatApp.Data.Entities.Common;
 using ChatApp.Models.Common;
 
 namespace ChatApp.Core.Services.Interfaces

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ChatApp.Core.Helpers;
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Data.Entities;
+using ChatApp.Data.Entities.Common;
 using ChatApp.Data.Interfaces;
 using ChatApp.Models.Common;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;

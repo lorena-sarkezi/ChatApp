@@ -5,8 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChatApp.Data.Entities.Common;
 
-namespace ChatApp.Data.Entities
+namespace ChatApp.Data.Entities.Chat
 {
     [Table("messages", Schema = "chat")]
     public class Message

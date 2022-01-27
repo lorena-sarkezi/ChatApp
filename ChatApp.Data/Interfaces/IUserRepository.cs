@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChatApp.Data.Entities;
+using ChatApp.Data.Entities.Common;
 
 namespace ChatApp.Data.Interfaces
 {

@@ -1,5 +1,6 @@
 ﻿using ChatApp.Common.ViewModels;
 using ChatApp.Data.Entities;
+using ChatApp.Data.Entities.Common;
 
 namespace ChatApp.Core.Data
 {

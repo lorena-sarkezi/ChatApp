@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using ChatApp.Data.Entities.Chat;
 
-namespace ChatApp.Data.Entities { 
+namespace ChatApp.Data.Entities.Common
+{ 
     [Table("users")]
     public class User
     {

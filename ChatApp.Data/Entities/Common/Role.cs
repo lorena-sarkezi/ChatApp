@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ChatApp.Data.Entities
+namespace ChatApp.Data.Entities.Common
 {
-    [Table("genders",Schema ="chat")]
-    public class Gender
+    [Table("roles")]
+    public class Role
     {
         public int Id { get; set; }
-        public int GenderName { get; set; }
+
+        public string RoleName { get; set; }
     }
 }

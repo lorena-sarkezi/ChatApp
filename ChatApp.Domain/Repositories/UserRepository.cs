@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ChatApp.Data;
-using ChatApp.Data.Entities;
+using ChatApp.Data.Entities.Common;
 using ChatApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

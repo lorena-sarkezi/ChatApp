@@ -8,6 +8,7 @@ using ChatApp.Core.Data;
 using System.Collections.Generic;
 using ChatApp.Core.Services.Interfaces;
 using System.Linq;
+using ChatApp.Data.Entities.Common;
 
 namespace ChatApp.Core.Controllers
 {

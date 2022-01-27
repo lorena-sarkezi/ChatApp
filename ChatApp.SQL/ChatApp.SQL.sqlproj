@@ -63,6 +63,7 @@
     <Folder Include="Indexes" />
     <Folder Include="Tables\dbo" />
     <Folder Include="Tables\chat" />
+    <Folder Include="Triggers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema\chat.sql" />
@@ -72,5 +73,8 @@
     <Build Include="Tables\dbo\Users.sql" />
     <Build Include="Tables\chat\Media.sql" />
     <Build Include="Tables\chat\Messages.sql" />
+    <Build Include="Tables\chat\Conversations.sql" />
+    <Build Include="Tables\chat\ConversationParticipants.sql" />
+    <Build Include="Triggers\trg_AfterMessageInsert.sql" />
   </ItemGroup>
 </Project>

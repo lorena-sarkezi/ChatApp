@@ -2,13 +2,16 @@ import { Row, Card } from "antd";
 
 import LoginForm from "../../components/loginForm";
 
-export const Login = () => {
+import '../../index.css';
 
-  return (
-    <Row>
-      <Card title="Login" className="horizontal_center">
-          <LoginForm />
-      </Card>
-    </Row>
-  );
+export const Login = () => {
+    
+
+    return (
+        <Row className="container-centered">
+            <Card title="Login" style={{width:"350px"}}>
+                <LoginForm />
+            </Card>
+        </Row>
+    );
 };

@@ -33,7 +33,6 @@ namespace ChatApp.Core.Controllers
             return Ok(token);
         }
 
-
         [HttpGet("validate")]
         public async Task<IActionResult> ValidateToken(string token)
         {

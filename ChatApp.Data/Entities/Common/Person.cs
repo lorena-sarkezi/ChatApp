@@ -12,8 +12,8 @@ namespace ChatApp.Data.Entities.Common
         [Required]
         public int Id { get; set; }
 
-        [Required]
-        public int GenderId { get; set; }
+        //[Required]
+        //public int GenderId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -21,6 +21,6 @@ namespace ChatApp.Data.Entities.Common
 
 
 
-        public virtual Gender Gender { get; set; }
+        //public virtual Gender Gender { get; set; }
     }
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const axiosClient = () => {
     const defaultOptions = {
-      baseURL: 'https://localhost:51806/',
+      baseURL: 'https://localhost:44395/',
       headers: {
         'Content-Type': 'application/json',
       },

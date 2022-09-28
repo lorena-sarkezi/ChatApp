@@ -10,5 +10,6 @@ namespace ChatApp.Data.Interfaces
         Task<User> GetByIdAsync(long userId);
         Task<User> GetByUsernameAsync(string username);
         Task<List<User>> GetAllAsync();
+        Task CreateUser(User user);
     }
 }

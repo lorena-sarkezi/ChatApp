@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using ChatApp.Common.ViewModels;
+using ChatApp.Core.Exceptions.Registration;
 using ChatApp.Core.Helpers;
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Data.Entities;
@@ -40,9 +44,7 @@ namespace ChatApp.Core.Services.Impl
 
             if (user == null) return null;
 
-            byte[] saltedPasswordByteArr = KeyDerivation.Pbkdf2(password, Encoding.ASCII.GetBytes(user.PasswordSalt), KeyDerivationPrf.HMACSHA256, 1000, 64);
-
-            if (Encoding.ASCII.GetString(saltedPasswordByteArr) != user.Password)
+            if (hashPassword(model.Password, user.PasswordSalt) != user.Password)
                 return null;
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
@@ -65,6 +67,37 @@ namespace ChatApp.Core.Services.Impl
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task RegisterUserAsync(UserRegisterDTO registerDTO)
+        {
+            if(registerDTO.Password != registerDTO.PasswordConfirm)
+            {
+                throw new RegistrationPasswordMatchException();
+            }
+
+            var passwordDecoded = Helpers.Base64.Base64Decode(registerDTO.Password);
+            var salt = generatePasswordSalt();
+
+            var hashedPassword = hashPassword(passwordDecoded, salt);
+
+            var personEntity = new Person
+            {
+                FirstName = registerDTO.FirstName,
+                LastName = registerDTO.LastName
+            };
+
+            var username = string.Concat(removeDiacritics(registerDTO.FirstName).ToLower(), ".", removeDiacritics(registerDTO.LastName).ToLower());
+            var userEntity = new User
+            {
+                Username = username,
+                TimestampCreated = DateTime.Now,
+                PasswordSalt = salt,
+                Password = hashedPassword,
+                Person = personEntity
+            };
+
+            await _userRepository.CreateUser(userEntity);
         }
 
         public async Task<bool> CheckIfTokenValid(string token)
@@ -98,6 +131,48 @@ namespace ChatApp.Core.Services.Impl
                 // return null if validation fails
                 return false;
             }
+        }
+
+        private static string hashPassword(string password, string salt)
+        {
+            var passwordByteArr = KeyDerivation.Pbkdf2(password, Encoding.ASCII.GetBytes(salt), KeyDerivationPrf.HMACSHA256, 1000, 64);
+            return Encoding.ASCII.GetString(passwordByteArr);
+        }
+
+        private static string generatePasswordSalt()
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                var guid = Guid.NewGuid().ToString();
+                var guidBytes = Encoding.UTF8.GetBytes(guid);
+
+                // ComputeHash - returns byte array  
+                byte[] bytesHashed = sha256Hash.ComputeHash(guidBytes);
+
+                // Convert byte array to a string   
+                return Encoding.ASCII.GetString(bytesHashed);
+            }
+        }
+
+        // https://stackoverflow.com/questions/249087/how-do-i-remove-diacritics-accents-from-a-string-in-net
+        private static string removeDiacritics(string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder(capacity: normalizedString.Length);
+
+            for (int i = 0; i < normalizedString.Length; i++)
+            {
+                char c = normalizedString[i];
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder
+                .ToString()
+                .Normalize(NormalizationForm.FormC);
         }
     }
 }

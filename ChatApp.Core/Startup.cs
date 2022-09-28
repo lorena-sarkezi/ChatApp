@@ -4,6 +4,8 @@ using ChatApp.Core.Hubs;
 using ChatApp.Core.Services.Impl;
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Data;
+using ChatApp.Data.Interfaces;
+using ChatApp.Domain.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -71,12 +73,20 @@ namespace ChatApp.Core
 
             services.AddCors(setup =>
             {
-                setup.AddDefaultPolicy(policy =>
+                //setup.AddDefaultPolicy(policy =>
+                //{
+                //    policy
+                //    .AllowAnyOrigin()
+                //        .AllowAnyHeader()
+                //        .AllowAnyMethod()
+                //        .AllowAnyOrigin();
+                //});
+
+                setup.AddPolicy("DefaultPolicy", policy =>
                 {
-                    policy
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowAnyOrigin();
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyOrigin();
                 });
             });
 
@@ -92,13 +102,16 @@ namespace ChatApp.Core
             });
 
             services.AddSignalR();
-
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("DefaultPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -125,14 +138,13 @@ namespace ChatApp.Core
                 await next();
             });
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            //app.UseIdentityServer();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

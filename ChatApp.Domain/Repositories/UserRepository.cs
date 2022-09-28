@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChatApp.Domain.Repositories
 {
-    class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ChatDbContext _chatDbContext;
 
@@ -29,6 +29,12 @@ namespace ChatApp.Domain.Repositories
         public async Task<List<User>> GetAllAsync()
         {
             return await _chatDbContext.Users.ToListAsync();
+        }
+
+        public async Task CreateUser(User user)
+        {
+            _chatDbContext.Users.Add(user);
+            await _chatDbContext.SaveChangesAsync();
         }
     }
 }

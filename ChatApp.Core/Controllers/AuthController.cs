@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using ChatApp.Common.ViewModels;
+using ChatApp.Core.Exceptions.Registration;
 using ChatApp.Core.Services.Interfaces;
 using ChatApp.Models.Common;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,25 @@ namespace ChatApp.Core.Controllers
                 return new UnauthorizedResult();
 
             return Ok(token);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterUser(UserRegisterDTO registerDTO)
+        {
+            try
+            {
+                await authService.RegisterUserAsync(registerDTO);
+            }
+            catch (RegistrationPasswordMatchException)
+            {
+                return BadRequest("Passwords don't match");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return Ok();
         }
 
         [HttpGet("validate")]
